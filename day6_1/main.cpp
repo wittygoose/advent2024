@@ -4,10 +4,6 @@
 #include <set>
 #include "../include/Utils.hpp"
 
-inline int get_index(int x, int y, int width) {
-    return y * width + x;
-}
-
 int main() {
     std::ifstream file("../day6_1/input.txt");
     if (!file.is_open()) {
@@ -33,7 +29,7 @@ int main() {
                     position.first = i;
                     position.second = y;
                     width = line.size();
-                    visited.insert(get_index(i, y, width));
+                    visited.insert(utils::get_index(i, y, width));
                     found = true;
                     break;
                 }
@@ -54,7 +50,7 @@ int main() {
             } else {
                 position.first = xNew;
                 position.second = yNew;
-                visited.insert(get_index(xNew, yNew, width));
+                visited.insert(utils::get_index(xNew, yNew, width));
             }
         } else {
             break;

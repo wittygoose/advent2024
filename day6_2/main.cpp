@@ -6,21 +6,13 @@
 
 std::vector<std::pair<int, int>> directions = {{0, -1}, {1, 0}, {0, 1}, {-1, 0}};
 
-inline int get_index(int x, int y, int width) {
-    return y * width + x;
-}
-
-bool is_valid_pos(int x, int y, std::vector<std::string>& field, int width) {
-    return x >= 0 && y >= 0 && x < width && y < field.size();
-}
-
 bool is_looped(std::pair<int, int> position, int index, std::vector<std::string>& field, int width) {
     std::set<int> visited;
     while (true) {
         auto& dir = directions.at(index);
         int xNew = position.first + dir.first;
         int yNew = position.second + dir.second;
-        if (is_valid_pos(xNew, yNew, field, width)) {
+        if (utils::is_valid_pos(xNew, yNew, field, width)) {
             char& letter = field.at(yNew).at(xNew);
             if (letter == '#') {
                 ++index;
@@ -28,7 +20,7 @@ bool is_looped(std::pair<int, int> position, int index, std::vector<std::string>
             } else {
                 position.first = xNew;
                 position.second = yNew;
-                auto insert = visited.insert(get_index(position.first, position.second, width) + index * 1000000);
+                auto insert = visited.insert(utils::get_index(position.first, position.second, width) + index * 1000000);
                 if (!insert.second) {
                     return true;
                 }
@@ -64,7 +56,7 @@ int main() {
                     position.first = i;
                     position.second = y;
                     width = line.size();
-                    visited.insert(get_index(position.first, position.second, width));
+                    visited.insert(utils::get_index(position.first, position.second, width));
                     found = true;
                     break;
                 }
@@ -77,13 +69,13 @@ int main() {
         auto& dir = directions.at(index);
         int xNew = position.first + dir.first;
         int yNew = position.second + dir.second;
-        if (is_valid_pos(xNew, yNew, field, width)) {
+        if (utils::is_valid_pos(xNew, yNew, field, width)) {
             char& letter = field.at(yNew).at(xNew);
             if (letter == '#') {
                 ++index;
                 if (index >= directions.size()) index = 0;
             } else {
-                auto insert = visited.insert(get_index(xNew, yNew, width));
+                auto insert = visited.insert(utils::get_index(xNew, yNew, width));
                 if (insert.second) {
                     field.at(yNew).at(xNew) = '#';
                     if (is_looped(position, index, field, width)) ++result;
