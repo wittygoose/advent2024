@@ -24,6 +24,10 @@ namespace utils {
         digit = digit * 10 + (ch - '0');
     }
 
+    int char_to_int(char ch) {
+        return ch - '0';
+    }
+
     // unique index in 2d vector
     inline int get_index(int x, int y, int width) {
         return y * width + x;
