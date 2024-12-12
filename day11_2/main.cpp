@@ -1,10 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include <vector>
-#include <list>
-#include <set>
 #include <map>
-#include <cmath>
 #include "../include/Utils.hpp"
 
 const uint64_t mult = 2024;
