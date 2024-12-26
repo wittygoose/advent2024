@@ -4,6 +4,7 @@
 #include <string>
 #include <chrono>
 #include <vector>
+#include <limits>
 
 struct Performance {
     Performance() {}
@@ -15,6 +16,18 @@ struct Performance {
     }
 
     std::chrono::time_point<std::chrono::high_resolution_clock> start = std::chrono::high_resolution_clock::now();
+};
+
+struct Range {
+    Range(int min = std::numeric_limits<int>::max(), int max = std::numeric_limits<int>::min()) : min(min), max(max) {}
+
+    int min;
+    int max;
+
+    void update(int value) {
+        if (value > max) max = value;
+        if (value < min) min = value;
+    }
 };
 
 namespace utils {
